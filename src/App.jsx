@@ -3,6 +3,8 @@ import { TVShowAPI } from "./api/tv-show";
 import { BACKDROP_BASE_URL } from "./constants";
 import TvShowDetail from "./components/TvShowDetail/TvShowDetail";
 import s from "./style.module.css";
+import Logo from "./components/Logo/Logo";
+import logoImg from "./assets/images/logo.png";
 
 const App = () => {
   const [currentTvShow, setCurrentTvShow] = useState();
@@ -30,8 +32,11 @@ const App = () => {
       <div className={s.header}>
         <div className="row">
           <div className="col-4">
-            <div>LOGO</div>
-            <div>Subtitle</div>
+            <Logo
+              img={logoImg}
+              title="NextWatch"
+              subtitle="Find a show you may like"
+            />
           </div>
           <div className="col-md-12 col-lg-4">
             <input style={{ width: "100%" }} type="text" />
