@@ -15,7 +15,7 @@ export class TVShowAPI {
       return response.data.results;
       // return FAKE_POPULARS;
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
 
@@ -32,7 +32,20 @@ export class TVShowAPI {
       return response.data.results;
       // return FAKE_RECOMMENDATIONS;
     } catch (error) {
-      console.error(error);
+      throw error;
+    }
+  }
+
+  static async fetchByTitle(title) {
+    try {
+      const response = await axios.get(`${BASE_URL}search/tv?query=${title}`, {
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+        },
+      });
+      return response.data.results;
+    } catch (error) {
+      throw error;
     }
   }
 }

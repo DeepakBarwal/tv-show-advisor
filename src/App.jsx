@@ -13,16 +13,26 @@ const App = () => {
   const [recommendationList, setRecommendationList] = useState([]);
 
   const fetchPopulars = async () => {
-    const poupularTvShowList = await TVShowAPI.fetchPopular();
-    if (poupularTvShowList.length > 0) {
-      setCurrentTvShow(poupularTvShowList[0]);
+    try {
+      const poupularTvShowList = await TVShowAPI.fetchPopular();
+      if (poupularTvShowList.length > 0) {
+        setCurrentTvShow(poupularTvShowList[0]);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const fetchRecommendations = async (tvShowId) => {
-    const recommendedListResp = await TVShowAPI.fetchRecommendations(tvShowId);
-    if (recommendedListResp.length > 0) {
-      setRecommendationList(recommendedListResp.slice(0, 10));
+    try {
+      const recommendedListResp = await TVShowAPI.fetchRecommendations(
+        tvShowId
+      );
+      if (recommendedListResp.length > 0) {
+        setRecommendationList(recommendedListResp.slice(0, 10));
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -38,6 +48,17 @@ const App = () => {
 
   const updateCurrentTvShow = (tvShow) => {
     setCurrentTvShow(tvShow);
+  };
+
+  const fetchByTitle = async (title) => {
+    try {
+      const searchResponse = await TVShowAPI.fetchByTitle(title);
+      if (searchResponse.length > 0) {
+        setCurrentTvShow(searchResponse[0]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -59,7 +80,7 @@ const App = () => {
             />
           </div>
           <div className="col-md-12 col-lg-4">
-            <SearchBar />
+            <SearchBar onSubmit={fetchByTitle} />
           </div>
         </div>
       </div>
