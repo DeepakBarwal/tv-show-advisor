@@ -35,6 +35,10 @@ const App = () => {
     }
   }, [currentTvShow]);
 
+  const updateCurrentTvShow = (tvShow) => {
+    setCurrentTvShow(tvShow);
+  };
+
   return (
     <div
       className={s.main_container}
@@ -63,7 +67,14 @@ const App = () => {
       </div>
       <div className={s.recommended_tv_shows}>
         {currentTvShow && (
-          <>{currentTvShow && <TvShowList tvShowList={recommendationList} />}</>
+          <>
+            {currentTvShow && (
+              <TvShowList
+                tvShowList={recommendationList}
+                onClickItem={updateCurrentTvShow}
+              />
+            )}
+          </>
         )}
       </div>
     </div>
